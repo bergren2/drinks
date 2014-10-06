@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Drinks</title>
+
+    <link rel="stylesheet" href="drinks.css">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700' rel='stylesheet' type='text/css'>
+
+    <script type='text/javascript' src='knockout-3.2.0.js'></script>
+    <script type='text/javascript' src='drinks.js'></script>
+  </head>
+  <body>
+    <h2>Bar Stock</h2>
+    <div id="bar-stock" data-bind="foreach: barStock">
+      <div class="stock">
+        <span data-bind="text: name"></span>
+        <span data-bind="text: amount"></span>
+        <span data-bind="text: units"></span>
+      </div>
+    </div>
+    <h2>Orders</h2>
+    <div id="orders" data-bind="foreach: drinks">
+      <div class="order">
+        <span data-bind="text: name"></span>
+        <ul data-bind="foreach: ingredients">
+          <li>
+            <span data-bind="text: name"></span>
+            <span data-bind="text: amount"></span>
+            <span data-bind="text: units"></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <button data-bind="click: placeOrder">Place Order</button>
+
+    <script type='text/javascript'>
+      ko.applyBindings(barStock, document.getElementById('bar-stock'));
+      ko.applyBindings(drinks, document.getElementById('orders'));
+    </script>
+  </body>
+</html>
