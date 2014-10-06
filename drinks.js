@@ -29,7 +29,7 @@ var barStock = [
   new Ingredient('Orange Juice', 48, 'oz'),
   new Ingredient('Limes', 36),
   new Ingredient('Cherries', 9),
-  new Ingredient('16 Celery Stalks', 16),
+  new Ingredient('Celery Stalks', 16),
   new Ingredient('Olives', 24)
 ];
 
