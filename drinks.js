@@ -15,6 +15,18 @@ var Drink = function (name, ingredients) {
   this.ingredients = ingredients;
 };
 
+var actions = {
+  addDrink: function (drink) {
+    console.log('add drink ' + drink.name);
+  },
+  removeDrink: function (drink) {
+    console.log('remove drink ' + drink.name);
+  },
+  placeOrder: function () {
+    console.log('place order');
+  }
+};
+
 // Initialize
 
 var barStock = [

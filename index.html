@@ -29,10 +29,12 @@
             <span data-bind="text: units"></span>
           </li>
         </ul>
+        <button data-bind="click: actions.addDrink">+</button>
+        <button data-bind="click: actions.removeDrink">-</button>
       </div>
     </div>
 
-    <button data-bind="click: placeOrder">Place Order</button>
+    <button data-bind="click: actions.placeOrder">Place Order</button>
 
     <script type='text/javascript'>
       ko.applyBindings(barStock, document.getElementById('bar-stock'));
