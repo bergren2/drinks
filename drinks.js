@@ -71,6 +71,28 @@ var DrinkCollection = function (drinksArray) {
 var Bar = function (ingredientsCollection, drinkCollection) {
   this.stock = ingredientsCollection;
   this.orders = drinkCollection;
+  var that = this;
+
+  this.orders._place = function () {
+    that._shouldShowOrdering(false);
+    that._shouldShowSummary(true);
+  };
+
+  this.orders._total = function () {
+    var total = 0;
+
+    var key;
+    for (key in that.orders) {
+      if (that.orders.hasOwnProperty(key) && key[0] !== '_') {
+        total += that.orders[key].quantity();
+      }
+    }
+
+    return total;
+  };
+
+  this._shouldShowOrdering = ko.observable(true);
+  this._shouldShowSummary = ko.observable(false);
 };
 
 // Initialize
@@ -114,7 +136,7 @@ var bar = new Bar(
     new Drink('Manhattan', new IngredientCollection([
       new Ingredient('Whiskey', '2 floz'),
       new Ingredient('Sweet Vermouth', '1 floz'),
-      new Ingredient('Cherry', '1')
+      new Ingredient('Cherries', '1')
     ]))
   ])
 );
