@@ -5,45 +5,62 @@
 
 var Ingredient = function (name, amount) {
   this.name = name;
-  if (typeof amount === 'number') {
-    this.amount = new Qty(amount.toString());
-  } else {
-    this.amount = new Qty(amount);
-  }
+  this.amount = new Qty(amount);
 };
 
 var IngredientCollection = function (ingredientsArray) {
-  this.ingredients = {};
-
   var i;
   for (i = 0; i < ingredientsArray.length; i++) {
-    this.ingredients[ingredientsArray[i].name] = ingredientsArray[i].amount;
+    this[ingredientsArray[i].name] = ingredientsArray[i].amount;
   }
-  this.array = ingredientsArray; // TODO update
+  this._array = ingredientsArray; // TODO update
 };
 
 var Drink = function (name, ingredientsCollection) {
   this.name = name;
   this.ingredients = ingredientsCollection;
-  this.quantity = ko.observable(0);
 };
 
 var DrinkCollection = function (drinksArray) {
-  this.drinks = {};
+  var that = this;
 
   var i;
   for (i = 0; i < drinksArray.length; i++) {
-    this.drinks[drinksArray[i].name] = {};
+    this[drinksArray[i].name] = {};
 
-    this.drinks[drinksArray[i].name] = drinksArray[i];
+    this[drinksArray[i].name] = drinksArray[i];
+    this[drinksArray[i].name].quantity = ko.observable(0);
   }
-  this.array = drinksArray; // TODO update
+  this._array = drinksArray; // TODO update
 
-  this.addDrink = function (drink) {
+  this._totalAmountOf = function (name) {
+    var quantity = Qty('0 ' + bar.stock[name].units());
+
+    var key;
+    for (key in that) {
+      if (that.hasOwnProperty(key) && key[0] !== '_' &&
+          that[key].quantity() > 0 &&
+          that[key].ingredients[name] !== undefined) {
+        quantity = quantity.add(that[key].ingredients[name].mul(that[key].quantity()));
+      }
+    }
+    return quantity;
+  };
+
+  this._addDrink = function (drink) {
     var current = drink.quantity();
+
+    var key;
+    for (key in drink.ingredients) {
+      if (drink.ingredients.hasOwnProperty(key) && key[0] !== '_') {
+        if (drink.ingredients[key].add(that._totalAmountOf(key)).gt(bar.stock[key])) {
+          return false;
+        }
+      }
+    }
     drink.quantity(current + 1);
   };
-  this.removeDrink = function (drink) {
+  this._removeDrink = function (drink) {
     var current = drink.quantity();
     if (current > 0) {
       drink.quantity(current - 1);
@@ -66,38 +83,38 @@ var bar = new Bar(
     new Ingredient('Sweet Vermouth', '750 mL'),
     new Ingredient('Dry Vermouth', '750 mL'),
     new Ingredient('Bloody Mary Mix', '750 L'),
-    new Ingredient('Agave Nectar', '24 oz'),
-    new Ingredient('Orange Juice', '48 oz'),
-    new Ingredient('Limes', 36),
-    new Ingredient('Cherries', 9),
-    new Ingredient('Celery Stalks', 16),
-    new Ingredient('Olives', 24)
+    new Ingredient('Agave Nectar', '24 floz'),
+    new Ingredient('Orange Juice', '48 floz'),
+    new Ingredient('Limes', '36'),
+    new Ingredient('Cherries', '9'),
+    new Ingredient('Celery Stalks', '16'),
+    new Ingredient('Olives', '24')
   ]),
   new DrinkCollection([
     new Drink('Bloody Mary', new IngredientCollection([
-      new Ingredient('Vodka', '2 oz'),
-      new Ingredient('Bloody Mary Mix', '4 oz'),
-      new Ingredient('Celery Stick', 1)
+      new Ingredient('Vodka', '2 floz'),
+      new Ingredient('Bloody Mary Mix', '4 floz'),
+      new Ingredient('Celery Stalks', '1')
     ])),
     new Drink('Martini', new IngredientCollection([
-      new Ingredient('Gin', '2 oz'),
-      new Ingredient('Dry Vermouth', '1 oz'),
-      new Ingredient('Olive', '1 oz')
+      new Ingredient('Gin', '2 floz'),
+      new Ingredient('Dry Vermouth', '1 floz'),
+      new Ingredient('Olives', '1')
     ])),
     new Drink('Margarita', new IngredientCollection([
-      new Ingredient('Tequila', '2 oz'),
-      new Ingredient('Orange Juice', '1 oz'),
-      new Ingredient('Agave Nectar', '1 oz'),
-      new Ingredient('Limes', '1 oz')
+      new Ingredient('Tequila', '2 floz'),
+      new Ingredient('Orange Juice', '1 floz'),
+      new Ingredient('Agave Nectar', '1 floz'),
+      new Ingredient('Limes', '1')
     ])),
     new Drink('Screwdriver', new IngredientCollection([
-      new Ingredient('Vodka', '2 oz'),
-      new Ingredient('Orange Juice', '4 oz')
+      new Ingredient('Vodka', '2 floz'),
+      new Ingredient('Orange Juice', '4 floz')
     ])),
     new Drink('Manhattan', new IngredientCollection([
-      new Ingredient('Whiskey', '2 oz'),
-      new Ingredient('Sweet Vermouth', '1 oz'),
-      new Ingredient('Cherry', 1)
+      new Ingredient('Whiskey', '2 floz'),
+      new Ingredient('Sweet Vermouth', '1 floz'),
+      new Ingredient('Cherry', '1')
     ]))
   ])
 );

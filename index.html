@@ -12,7 +12,7 @@
   </head>
   <body>
     <h2>Bar Stock</h2>
-    <div id="bar-stock" data-bind="foreach: bar.stock.array">
+    <div id="bar-stock" data-bind="foreach: bar.stock._array">
       <div class="stock">
         <span data-bind="text: name"></span>
         <span class="scalar" data-bind="text: amount.scalar"></span>
@@ -20,10 +20,10 @@
       </div>
     </div>
     <h2>Orders</h2>
-    <div id="orders">
-      <div class="drinks" data-bind="foreach: bar.orders.array">
+    <div id="orders" data-bind="foreach: bar.orders._array">
+      <div class="drink">
         <span data-bind="text: name"></span>
-        <ul data-bind="foreach: ingredients.array">
+        <ul data-bind="foreach: ingredients._array">
           <li>
             <span data-bind="text: name"></span>
             <span class="scalar" data-bind="text: amount.scalar"></span>
@@ -31,16 +31,14 @@
           </li>
         </ul>
         <div class="drink-amount" data-bind="text: quantity"></div>
-        <button data-bind="click: bar.orders.addDrink">+</button>
-        <button data-bind="click: bar.orders.removeDrink">-</button>
+        <button data-bind="click: bar.orders._addDrink">+</button>
+        <button data-bind="click: bar.orders._removeDrink">-</button>
       </div>
-
-      <button data-bind="click: orders.place">Place Order</button>
     </div>
+    <button data-bind="click: orders.place">Place Order</button>
 
     <script type='text/javascript'>
-      ko.applyBindings(bar.stock.array, document.getElementById('bar-stock'));
-      ko.applyBindings(bar.orders.array, document.getElementById('orders'));
+      ko.applyBindings(bar);
     </script>
   </body>
 </html>
