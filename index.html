@@ -7,38 +7,40 @@
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700' rel='stylesheet' type='text/css'>
 
     <script type='text/javascript' src='knockout-3.2.0.js'></script>
+    <script src='quantities.js'></script>
     <script type='text/javascript' src='drinks.js'></script>
   </head>
   <body>
     <h2>Bar Stock</h2>
-    <div id="bar-stock" data-bind="foreach: barStock">
+    <div id="bar-stock" data-bind="foreach: bar.stock.array">
       <div class="stock">
         <span data-bind="text: name"></span>
-        <span data-bind="text: amount"></span>
-        <span data-bind="text: units"></span>
+        <span class="scalar" data-bind="text: amount.scalar"></span>
+        <span class="units" data-bind="text: amount.units().toUpperCase()"></span>
       </div>
     </div>
     <h2>Orders</h2>
-    <div id="orders" data-bind="foreach: drinks">
-      <div class="order">
+    <div id="orders">
+      <div class="drinks" data-bind="foreach: bar.orders.array">
         <span data-bind="text: name"></span>
-        <ul data-bind="foreach: ingredients">
+        <ul data-bind="foreach: ingredients.array">
           <li>
             <span data-bind="text: name"></span>
-            <span data-bind="text: amount"></span>
-            <span data-bind="text: units"></span>
+            <span class="scalar" data-bind="text: amount.scalar"></span>
+            <span class="units" data-bind="text: amount.units().toUpperCase()"></span>
           </li>
         </ul>
-        <button data-bind="click: actions.addDrink">+</button>
-        <button data-bind="click: actions.removeDrink">-</button>
+        <div class="drink-amount" data-bind="text: quantity"></div>
+        <button data-bind="click: bar.orders.addDrink">+</button>
+        <button data-bind="click: bar.orders.removeDrink">-</button>
       </div>
+
+      <button data-bind="click: orders.place">Place Order</button>
     </div>
 
-    <button data-bind="click: actions.placeOrder">Place Order</button>
-
     <script type='text/javascript'>
-      ko.applyBindings(barStock, document.getElementById('bar-stock'));
-      ko.applyBindings(drinks, document.getElementById('orders'));
+      ko.applyBindings(bar.stock.array, document.getElementById('bar-stock'));
+      ko.applyBindings(bar.orders.array, document.getElementById('orders'));
     </script>
   </body>
 </html>
