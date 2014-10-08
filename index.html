@@ -13,30 +13,38 @@
   <body>
     <div id="ordering-page" data-bind="visible: _shouldShowOrdering">
       <h2>Bar Stock</h2>
-      <div id="bar-stock" data-bind="foreach: bar.stock._array">
-        <div class="stock">
-          <span data-bind="text: name"></span>
-          <span class="scalar" data-bind="text: amount.scalar"></span>
-          <span class="units" data-bind="text: amount.units().toUpperCase()"></span>
-        </div>
-      </div>
+      <ul id="bar-stock" data-bind="foreach: bar.stock._array">
+        <li class="stock">
+          <span class="name" data-bind="text: name"></span>
+          <div class="amount">
+            <span class="scalar" data-bind="text: amount.scalar"></span>
+            <span class="units" data-bind="text: amount.units().replace(/floz/, 'oz').toUpperCase()"></span>
+          </div>
+        </li>
+      </ul>
       <h2>Orders</h2>
       <div id="orders" data-bind="foreach: bar.orders._array">
         <div class="drink">
-          <span data-bind="text: name"></span>
+          <div class="name" data-bind="text: name"></div>
           <ul data-bind="foreach: ingredients._array">
             <li>
               <span data-bind="text: name"></span>
-              <span class="scalar" data-bind="text: amount.scalar"></span>
-              <span class="units" data-bind="text: amount.units().toUpperCase()"></span>
+              <div class="amount">
+                <span class="scalar" data-bind="text: amount.scalar"></span>
+                <span class="units" data-bind="text: amount.units().replace(/floz/, 'oz').toUpperCase()"></span>
+              </div>
             </li>
           </ul>
-          <div class="drink-amount" data-bind="text: quantity"></div>
-          <button data-bind="click: bar.orders._addDrink">+</button>
-          <button data-bind="click: bar.orders._removeDrink">-</button>
+          <div class="actions">
+            <button class="add" data-bind="click: bar.orders._addDrink">+</button>
+            <button class="remove" data-bind="click: bar.orders._removeDrink">-</button>
+            <div class="drink-amount" data-bind="text: quantity"></div>
+          </div>
         </div>
       </div>
-      <button data-bind="click: orders._place">Place Order</button>
+      <div class="place-order">
+        <button data-bind="click: orders._place">Place Order</button>
+      </div>
     </div>
 
     <div id="summary-page" data-bind="visible: _shouldShowSummary">

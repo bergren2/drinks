@@ -1,27 +1,138 @@
 body {
+  margin: 0;
   background: #000;
-  color: #aa43b6;
-  font-family: 'Source Sans Pro', sans-serif;
-}
+  color: #dbb9f9;
+  font-family: 'Source Sans Pro', sans-serif;}
+
+#ordering-page, #summary-page {
+  margin: 0 auto;
+  max-width: 900px;}
 
 h2 {
   color: #fff;
   font-weight: 200;
   font-size: 50px;
-}
+  text-align: center;
+  clear: both;}
 
-.scalar {
-  color: #fff;
-}
+ul {
+  list-style: none;
+  padding: 0;}
 
-#bar-stock .scalar {
-  font-size: 16px;
-}
+button {
+  font-family: 'Source Sans Pro', sans-serif;}
 
-.units {
-  font-weight: bold;
-}
+.place-order {
+  clear: both;
+  text-align: center;
+  padding-top: 50px;}
 
-#bar-stock .units {
-  font-size: 10px;
-}
+  .place-order button {
+    border: none;
+    border-radius: 3px;
+    width: 90%;
+    max-width: 350px;
+    padding: 0;
+    box-sizing: border-box;
+    font-weight: 200;
+    font-size: 24px;
+    line-height: 50px;
+    color: #fff;
+    background: #9b59b6;}
+
+.drink {
+  position: relative;
+  width: 160px;
+  float: left;
+  margin: 10px;
+  background: #37373a;
+  height: 250px;
+  min-width: 100px;
+  color: #666;}
+
+  .drink .name {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px;
+    background: #211d23;
+    color: #dbb9f9;
+    font-size: 24px;
+    font-weight: 300;}
+
+  .drink li {
+    font-size: 12px;
+    padding: 5px 15px;}
+
+  .drink .amount {
+    float: left;
+    margin-right: 15px;
+    width: 25px;}
+
+  .drink .units {
+    font-size: 9px;}
+
+  .drink-amount {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    text-align: right;
+    padding: 10px;
+    box-sizing: border-box;
+    line-height: 30px;
+    color: #3a3a3d;
+    background: #ecf0f1;
+    font-size: 32px;
+    font-weight: bold;
+    border-radius: 7px;}
+
+  .drink .actions {
+    position: absolute;
+    padding: 15px;
+    box-sizing: border-box;
+    bottom: 0;
+    width: 100%;
+    text-align: center;}
+
+  .drink .actions button {
+    display: inline-block;
+    background: none;
+    width: 40px;
+    height: 40px;
+    border: none;
+    padding: 0;
+    font-weight: bold;
+    font-size: 64px;
+    line-height: 40px;}
+
+  .drink .add {
+    float: left;
+    color: #26ae60;}
+
+  .drink .remove {
+    float: right;
+    color: #c0382b;}
+
+#bar-stock {
+  text-align: right;}
+
+  #bar-stock li {
+    float: left;
+    width: 195px;
+    margin: 5px 15px;
+    border-bottom: 1px solid #393540;}
+
+  #bar-stock .name {
+    float: left;}
+
+  #bar-stock .amount {
+    min-width: 41px;
+    display: inline-block;
+    text-align: left;}
+
+  #bar-stock .scalar {
+    font-size: 16px;
+    color: #fff;}
+
+  #bar-stock .units {
+    font-size: 10px;
+    font-weight: bold;}
