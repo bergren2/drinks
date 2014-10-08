@@ -3,6 +3,8 @@
   <head>
     <title>Drinks</title>
 
+    <meta name="viewport" content="width=device-width">
+
     <link rel="stylesheet" href="drinks.css">
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700' rel='stylesheet' type='text/css'>
 
@@ -51,14 +53,14 @@
       <h2>Summary</h2>
       <ul data-bind="foreach: bar.orders._array">
         <li>
-          <span data-bind="text: quantity"></span>
+          <span class="scalar" data-bind="text: quantity"></span>
           <span data-bind="text: name"></span>
         </li>
       </ul>
       <hr />
       <div class="total">
-        <span data-bind="text: bar.orders._total()"></span>
-        <span>TOTAL</span>
+        <span class="scalar" data-bind="text: bar.orders._total()"></span>
+        <span class="total">TOTAL</span>
       </div>
     </div>
 

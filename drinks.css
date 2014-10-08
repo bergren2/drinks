@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  margin-bottom: 15px;
   background: #000;
   color: #dbb9f9;
   font-family: 'Source Sans Pro', sans-serif;}
@@ -7,6 +8,21 @@ body {
 #ordering-page, #summary-page {
   margin: 0 auto;
   max-width: 900px;}
+
+#summary-page {
+  width: 180px;
+  font-size: 24px;
+  font-weight: 300;}
+
+  #summary-page .scalar {
+    margin-right: 30px;
+    color: #fff;}
+
+  #summary-page .total {
+    font-weight: bold;}
+
+  #sumamry-page li {
+    margin: 10px 0;}
 
 h2 {
   color: #fff;
@@ -20,7 +36,11 @@ ul {
   padding: 0;}
 
 button {
-  font-family: 'Source Sans Pro', sans-serif;}
+  font-family: 'Source Sans Pro', sans-serif;
+  outline: none;}
+
+  button:hover {
+    cursor: pointer;}
 
 .place-order {
   clear: both;
@@ -136,3 +156,49 @@ button {
   #bar-stock .units {
     font-size: 10px;
     font-weight: bold;}
+
+@media (max-width: 768px) {
+  #bar-stock {
+    padding: 15px;}
+
+  #orders {
+    padding: 15px;}
+  .drink {
+    width: 226px;
+    height: 300px;}
+  .drink li {
+    font-size: 16px;}
+}
+
+@media (max-width: 480px) {
+  #bar-stock {
+    padding: 15px;}
+  #bar-stock li {
+    margin: 5px 0;
+    width: 100%;}
+
+  #orders {
+    padding: 15px;}
+  .drink {
+    margin: 10px 0;
+    width: 100%;
+    height: 300px;}
+  .drink .actions button {
+    width: 75px;
+    height: 75px;
+    line-height: 75px;
+    font-size: 82px;}
+  .drink-amount {
+    width: 75px;
+    height: 75px;
+    font-size: 56px;
+    line-height: 55px;}
+
+  .drink li {
+    font-size: 16px;}
+
+  .place-order {
+    padding: 15px;}
+  .place-order button {
+    width: 100%;}
+}
